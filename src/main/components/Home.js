@@ -48,13 +48,15 @@ export default function () {
   const contactRef = useRef(null);
   const trainingRef = useRef(null);
   const videosRef = useRef(null);
+  const galleryRef = useRef(null);
+  const tuitionRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const [index, setIndex] = useState(0);
@@ -62,6 +64,8 @@ export default function () {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
+  const [MobileMenu, setMobileMenu] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -75,7 +79,7 @@ export default function () {
         </Container>
         <div
           className="header-bar-two float-end clearfix"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "space-between" }}
         >
           <ul>
             <a href="https://www.facebook.com">
@@ -88,6 +92,23 @@ export default function () {
               <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </ul>
+          <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} style={{ marginRight: "5px"}} onClick={() => setMobileMenu(false)}>   
+                <Link to='/'><b style={{ color : "#013C2C" , fontWeight: "bold"}}>Tutorial</b></Link>
+              </ul>
+              <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} style={{ marginRight: "55px"}}  onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}>   
+                <Link to='/'><b style={{ color : "#013C2C" , fontWeight: "bold"}}>Videos</b></Link>
+              </ul>
+          <Button
+                    type="button"
+                    className="but btn btn-dark w-20 m-1 p-2"
+                    onClick={() => {
+                      window.location.href = "tel:+1234567890";
+                    }}
+                  >
+                    <i className="fa fa-phone" /> <b className="call">Call us</b>
+                  </Button>
         </div>
       </div>
 
@@ -98,7 +119,7 @@ export default function () {
             <NavbarBrand href="/">
               <Image
                 src={require("../assets/images/logos/pjop.png")}
-                className="custom-logo"
+                className="custom-pjop"
               ></Image>
             </NavbarBrand>
 
@@ -137,34 +158,56 @@ export default function () {
                     <b style={{ color: "green" }}>About</b>
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink
                     onClick={() => {
                       courseRef.current?.scrollIntoView();
                     }}
                     href="#"
                     style={{ color: "green" }}
-                  >
-                    {/* <Link to={"/courses"}> */}
+                  >              
                     <b style={{ color: "green" }}>Courses</b>
-                    {/* </Link> */}
                   </NavLink>
-                </NavItem>
-                {/* <UncontrolledDropdown nav inNavbar>
+                </NavItem> */}
+                <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav style={{ color: "green" }}>
                     <b>Courses</b> <i className="fa fa-angle-down m-l-5"></i>
                   </DropdownToggle>
                   <DropdownMenu className="b-none animated fadeInUp">
-                    <DropdownItem><b>DCA</b></DropdownItem>
-                    <DropdownItem><b>Desktop Publishing</b></DropdownItem>
-                    <DropdownItem><b>Software Development</b></DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/dca"} onClick={scrollToTop} style={{ color: "#263238" }}>
+                      <b>DCA</b>
+                      </Link>
+                    </DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/desktop"} onClick={scrollToTop} style={{ color: "#263238" }}>
+                      <b>Desktop Publishing</b>
+                    </Link>
+                    </DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/software_development"} onClick={scrollToTop} style={{ color: "#263238" }}>
+                      <b>Software Development</b>
+                      </Link>
+                    </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem><b>Web Designing</b></DropdownItem>
-                    <DropdownItem><b>Advanced Python</b></DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/web_designing"} onClick={scrollToTop} style={{ color: "#263238" }}>
+                      <b>Web Designing</b>
+                      </Link>
+                    </DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/Advanced_python"} onClick={scrollToTop} style={{ color: "#263238" }}>
+                      <b>Advanced Python</b>
+                      </Link>
+                    </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem><b>Hardware Networking</b></DropdownItem>
+                    <DropdownItem>
+                    <Link to={"/Hardware_networking"} onClick={scrollToTop} style={{ color: "#263238" }} >
+                      <b>Hardware Networking</b>
+                      </Link>
+                    </DropdownItem>
                   </DropdownMenu>
-                </UncontrolledDropdown> */}
+                </UncontrolledDropdown>
                 <NavItem>
                   <NavLink
                     href="/"
@@ -183,6 +226,45 @@ export default function () {
                     href="/"
                     style={{ color: "green" }}
                     onClick={() => {
+                      galleryRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={"/gallery"} onClick={scrollToTop}>
+                      <b style={{ color: "green" }}>Gallery</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Typewriting</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      tuitionRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={"/tuition"} onClick={scrollToTop}>
+                      <b style={{ color: "green" }}>Tuition</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                {/* <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
                       videosRef.current?.scrollIntoView();
                     }}
                   >
@@ -190,7 +272,7 @@ export default function () {
                       <b style={{ color: "green" }}>Videos</b>
                     </Link>
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem>
                   <NavLink
                     onClick={() => {
@@ -208,7 +290,7 @@ export default function () {
                   {/* <a className="btn btn-success text-black mt-0" href="#"> */}
                   {/* <Link to={"/login"}> */}
                   {/* <b style={{color:'black'}}>Call us</b> */}
-                  <Button
+                  {/* <Button
                     type="button"
                     className="btn btn-success w-100"
                     onClick={() => {
@@ -216,16 +298,57 @@ export default function () {
                     }}
                   >
                     <i class="fa fa-phone" /> <b>Call us</b>
-                  </Button>
-
-                  {/* </Link> */}
-                  {/* </a>                  */}
+                  </Button> */}
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </Container>
       </div>
+
+      <div className="menu-bar" style={{marginTop: "-15px"}} >
+          <Container>
+            <p style={{ color: "white" }} className="navlinks">
+            <Link to={"/html"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>HTML</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/css"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>CSS</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/javascript"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Javascript</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/php"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>PHP</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/sql"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>SQL</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/reactjs"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>ReactJs</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/bootstrap"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Bootstrap</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/mongodb"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>MongoDB</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/nodejs"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>NodeJs</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/typescript"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Typescript</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/angular"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Angular</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/sass"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Sass</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
+          </Container>
+        </div>
+
       {/* navbar end */}
 
       <Carousel interval={3000}>
@@ -233,6 +356,7 @@ export default function () {
           <Image
             src={require("../assets/images/landingpage/slide1.jpg")}
             alt="First slide"
+            // style={{height: "700px"}}
           />
           <Carousel.Caption>
             <Container>
@@ -344,6 +468,7 @@ export default function () {
           <Image
             src={require("../assets/images/landingpage/slide2.jpg")}
             alt="Second slide"
+            // style={{height: "700px"}}
           />
           <Carousel.Caption>
             <Container>
@@ -454,6 +579,7 @@ export default function () {
           <Image
             src={require("../assets/images/landingpage/slide3.jpg")}
             alt="Third slide"
+            // style={{height: "700px"}}
           />
           <Carousel.Caption>
             <Container>
@@ -474,6 +600,9 @@ export default function () {
                 </Col>
                 <Col lg="6" md="6" className="text-center">
                   <div className="card-shadow increased-width">
+                    <h1 className="m-5" style={{ textAlign: "right" }}>
+                      <b style={{ color: "white" }}> Learning that gets you</b>
+                    </h1>
                     <Card className="card-shadow move-right">
                       <CardBody className="mb-2">
                         <h4 className="font-weight-bold text-decoration">
@@ -577,15 +706,6 @@ export default function () {
 
         <Container>
           <Row className="align-items-center">
-            <Col xs="12" lg="6">
-              <div className="text-center text-lg-start">
-                <img
-                  src={about}
-                  className="about img-fluid mt-5 rounded-3"
-                  alt="About Us Image"
-                />
-              </div>
-            </Col>
             <Col xs="12" lg="6" className="head pt-4">
               <div className="text-center text-lg-start">
                 <h1 style={{ color: "#0dba4b" }}>
@@ -610,6 +730,15 @@ export default function () {
                 </p>
               </div>
             </Col>
+            <Col xs="12" lg="6">
+              <div className="text-center ">
+                <img
+                  src={about}
+                  className="about img-fluid mt-5 rounded-3"
+                  alt="About Us Image"
+                />
+              </div>
+            </Col>
           </Row>
         </Container>
       </div>
@@ -629,6 +758,7 @@ export default function () {
             }}
           />
         </h1>
+        <br />
         <h2 className="text-center tsp">
           <b>Easy and effective Training and Learning</b>
         </h2>
@@ -637,20 +767,19 @@ export default function () {
         <Container>
           <Row className="m-t-40">
             <Col md="4">
+            <Link to={"/dca"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a className="img-ho">
-                    <Link to={"/dca"} onClick={scrollToTop}>
+                <div className="text-center mt-5">
+                  <a className="img-ho">                  
                       <img
                         className="card-img-top1"
                         src={c1}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>DCA PGDCA HDCA</b>
                   </h5>
                   <br />
@@ -662,22 +791,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="4">
+            <Link to={"/desktop"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a href="#" className="img-ho">
-                    <Link to={"/desktop"} onClick={scrollToTop}>
                       <img
                         className="card-img-top2"
                         src={c2}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>Desktop publishing</b>
                   </h5>
                   <br />
@@ -689,22 +818,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="4">
+            <Link to={"/Software_development"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a href="#" className="img-ho">
-                    <Link to={"/Software_development"} onClick={scrollToTop}>
+                <div className="text-center mt-5">
+                  <a href="#" className="img-ho">                 
                       <img
                         className="card-img-top3"
                         src={c33}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>Software Devlopment</b>
                   </h5>
                   <br />
@@ -716,22 +845,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="4">
+            <Link to={"/Web_designing"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a href="#" className="img-ho">
-                    <Link to={"/Web_designing"} onClick={scrollToTop}>
                       <img
                         className="card-img-top4"
                         src={c44}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>Web Designing</b>
                   </h5>
                   <br />
@@ -743,22 +872,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="4">
+            <Link to={"/Advanced_python"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a href="#" className="img-ho">
-                    <Link to={"/Advanced_python"} onClick={scrollToTop}>
+                <div className="text-center mt-5">
+                  <a href="#" className="img-ho">                 
                       <img
                         className="card-img-top5"
                         src={c55}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>Advanced Python</b>
                   </h5>
                   <br />
@@ -770,22 +899,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="4">
+            <Link to={"/Hardware_networking"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a href="#" className="img-ho">
-                    <Link to={"/Hardware_networking"} onClick={scrollToTop}>
+                <div className="text-center mt-5">
+                  <a href="#" className="img-ho">                  
                       <img
                         className="card-img-top6"
                         src={c67}
                         alt="wrappixel kit"
                       />
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>Hardware Networking</b>
                   </h5>
                   <br />
@@ -797,23 +926,24 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col xs="12" className="justify-content-center d-flex">
+            <Link to={"/courses"} onClick={scrollToTop}>
               <a
                 className="btn btn-success-gradiant btn-md btn-arrow m-t-20"
                 href="/"
               >
-                {" "}
-                <Link to={"/courses"} onClick={scrollToTop}>
+                {" "}          
                   <span style={{ color: "white" }}>
                     View More<i className="ti-arrow-right"></i>
-                  </span>
-                </Link>
+                  </span>                
               </a>
+              </Link>
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> 
       <br />
       <br />
       <br />
@@ -834,6 +964,7 @@ export default function () {
               }}
             />
           </h1>
+          <br />
           <h2 className="text-center tsp">
             <b>
               We package the Courses with best Training to make you a happy
@@ -845,20 +976,19 @@ export default function () {
         <Container>
           <Row>
             <Col md="3">
+            <Link to={"/ms_office"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/msoffice1.jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>MS OFFICE TRAINING</b>
                   </h5>
                   <br />
@@ -867,22 +997,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/photoshop"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/photoshop.jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>PHOTOSHOP</b>
                   </h5>
                   <br />
@@ -891,22 +1021,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/coreldraw"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/coreldraw.jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>CORELDRAW</b>
                   </h5>
                   <br />
@@ -915,22 +1045,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/tallyprime"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a className="img-ho">
-                    <Link to={"/dca"}>
+                <div className="text-center mt-5">
+                  <a className="img-ho">             
                       <Image
                         src={require("../assets/images/portfolio/tallyprime.png")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>TALLY PRIME</b>
                   </h5>
                   <br />
@@ -939,22 +1069,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/mathematics"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/maths.jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>MATHEMATICS</b>
                   </h5>
                   <br />
@@ -963,22 +1093,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/spoken_english"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
-                  <a className="img-ho">
-                    <Link to={"/dca"}>
+                <div className="text-center mt-5">
+                  <a className="img-ho">                   
                       <Image
                         src={require("../assets/images/portfolio/english.jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>SPOKEN ENGLISH</b>
                   </h5>
                   <br />
@@ -987,22 +1117,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/spoken_hindi"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/hindi (1).jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>SPOKEN HINDI</b>
                   </h5>
                   <br />
@@ -1011,22 +1141,22 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col md="3">
+            <Link to={"/learn_french"} onClick={scrollToTop}>
               <Card className="card-shadow shadow">
-                <div className="text-center">
+                <div className="text-center mt-5">
                   <a className="img-ho">
-                    <Link to={"/dca"}>
                       <Image
                         src={require("../assets/images/portfolio/french (1).jpg")}
                         className="msoffice"
                         alt="ms"
                       ></Image>
-                    </Link>
                   </a>
                 </div>
                 <CardBody>
-                  <h5 className="font-medium m-b-0 text-center">
+                  <h5 className="font-medium m-b-0 text-center mt-2">
                     <b>LEARN FRENCH</b>
                   </h5>
                   <br />
@@ -1035,25 +1165,27 @@ export default function () {
                   </p>
                 </CardBody>
               </Card>
+              </Link>
             </Col>
             <Col xs="12" className="justify-content-center d-flex">
+            <Link to={"/training"} onClick={scrollToTop}>
               <a
                 className="btn btn-success-gradiant btn-md btn-arrow m-t-20"
                 href="/"
               >
                 {" "}
-                <Link to={"/training"}  onClick={scrollToTop}>
                   <span style={{ color: "white" }}>
                     View More<i className="ti-arrow-right"></i>
                   </span>
-                </Link>
               </a>
+             </Link>
             </Col>
           </Row>
         </Container>
       </div>
       <div className="spacer"></div>
-
+      
+       {/* Videos */}
       <div ref={videosRef} className="title-holder">
         <h1 className="text-center">
           <b>Videos</b>
@@ -1065,6 +1197,7 @@ export default function () {
             }}
           />
         </h1>
+        <br />
         <h2 className="text-center tsp">
           <b>We package the videos to make you a happy student</b>
         </h2>
@@ -1118,17 +1251,17 @@ export default function () {
         </Carousel>
         <Row>
           <Col xs="12" className="justify-content-center d-flex">
+          <Link to={"/videos"} onClick={scrollToTop}>
             <a
               className="btn btn-success-gradiant btn-md btn-arrow m-t-20"
               href="/"
             >
               {" "}
-              <Link to={"/videos"}  onClick={scrollToTop}>
-                <span style={{ color: "white" }}>
+                           <span style={{ color: "white" }}>
                   View More<i className="ti-arrow-right"></i>
                 </span>
-              </Link>
             </a>
+            </Link>
           </Col>
         </Row>
       </Container>
@@ -1136,147 +1269,151 @@ export default function () {
       <div className="spacer"></div>
 
       {/* Testimonial */}
-      <div className="title-holder">
-        <h1 className="text-center">
-          <b>Testimonial</b>
-          <hr
-            style={{
-              borderTop: "5px solid green",
-              width: "10%",
-              margin: "auto",
-            }}
-          />
-        </h1>
-        <h2 className="text-center tsp">
-          <b>Check what our Customers are Saying</b>
-        </h2>
-      </div>
-      {/* <div className="spacer"></div> */}
+      <div className="testimonial">
+        <div className="testimonial">
+          <h1 className="text-center">
+            <b>Testimonial</b>
+            <hr
+              style={{
+                borderTop: "5px solid green",
+                width: "10%",
+                margin: "auto",
+              }}
+            />
+          </h1>
+          <br />
+          <h2 className="text-center tsp">
+            <b>Check what our Customers are Saying</b>
+          </h2>
+        </div>
+        {/* <div className="spacer"></div> */}
 
-      <div>
-        <div className="testimonial3 bg-light">
-          <Container>
-            <Row className="testi3 m-t-40 justify-content-center">
-              <Col lg="4" md="6">
-                <Card className="card-shadow">
-                  <CardBody>
-                    <h6 className="font-light m-b-30">
-                      <b>
-                        “You guys rock! Thank you for making it painless,
-                        pleasant and most of all hassle free! I wish I would
-                        have thought of it first. <br />I am really satisfied
-                        with my first videos Training.”
-                      </b>
-                    </h6>
-                    <div className="d-flex no-block align-items-center">
-                      <span className="thumb-img">
-                        <img src={img1} alt="wrapkit" className="circle" />
-                      </span>
-                      <div className="m-l-20">
-                        <h6 className="m-b-0 customer">Michelle Anderson</h6>
-                        <div className="font-10">
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-muted">
-                            <i className="fa fa-star"></i>
-                          </a>
+        <div className="testimonial">
+          <div className="testimonial testimonial3 bg-secondary-subtle">
+            <Container>
+              <Row className="testi3 m-t-40 justify-content-center">
+                <Col lg="4" md="6" className="mt-5">
+                  <Card className="card-shadow">
+                    <CardBody>
+                      <h6 className="font-light m-b-30">
+                        <b>
+                          “You guys rock! Thank you for making it painless,
+                          pleasant and most of all hassle free! I wish I would
+                          have thought of it first. <br />I am really satisfied
+                          with my first videos Training.”
+                        </b>
+                      </h6>
+                      <div className="d-flex no-block align-items-center">
+                        <span className="thumb-img">
+                          <img src={img1} alt="wrapkit" className="circle" />
+                        </span>
+                        <div className="m-l-20">
+                          <h6 className="m-b-0 customer">Michelle Anderson</h6>
+                          <div className="font-10">
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-muted">
+                              <i className="fa fa-star"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col lg="4" md="6">
-                <Card className="card-shadow">
-                  <CardBody>
-                    <h6 className="font-light m-b-30">
-                      <b>
-                        “You guys rock! Thank you for making it painless,
-                        pleasant and most of all hassle free! I wish I would
-                        have thought of it first.
-                        <br /> I am really satisfied with my first French
-                        Class.”
-                      </b>
-                    </h6>
-                    <div className="d-flex no-block align-items-center">
-                      <span className="thumb-img">
-                        <img src={img2} alt="wrapkit" className="circle" />
-                      </span>
-                      <div className="m-l-20">
-                        <h6 className="m-b-0 customer">Mark mesty</h6>
-                        <div className="font-10">
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-muted">
-                            <i className="fa fa-star"></i>
-                          </a>
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Col lg="4" md="6" className="mt-5">
+                  <Card className="card-shadow">
+                    <CardBody>
+                      <h6 className="font-light m-b-30">
+                        <b>
+                          “You guys rock! Thank you for making it painless,
+                          pleasant and most of all hassle free! I wish I would
+                          have thought of it first.
+                          <br /> I am really satisfied with my first French
+                          Class.”
+                        </b>
+                      </h6>
+                      <div className="d-flex no-block align-items-center">
+                        <span className="thumb-img">
+                          <img src={img2} alt="wrapkit" className="circle" />
+                        </span>
+                        <div className="m-l-20">
+                          <h6 className="m-b-0 customer">Mark mesty</h6>
+                          <div className="font-10">
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-muted">
+                              <i className="fa fa-star"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col lg="4" md="6">
-                <Card className="card-shadow">
-                  <CardBody>
-                    <h6 className="font-light m-b-30">
-                      <b>
-                        “You guys rock! Thank you for making it painless,
-                        pleasant and most of all hassle free! I wish I would
-                        have thought of it first.
-                        <br /> I am really satisfied with my first Photoshop..”
-                      </b>
-                    </h6>
-                    <div className="d-flex no-block align-items-center">
-                      <span className="thumb-img">
-                        <img src={img3} alt="wrapkit" className="circle" />
-                      </span>
-                      <div className="m-l-20">
-                        <h6 className="m-b-0 customer">Limpsy adam</h6>
-                        <div className="font-10">
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-success">
-                            <i className="fa fa-star"></i>
-                          </a>
-                          <a href="" className="text-muted">
-                            <i className="fa fa-star"></i>
-                          </a>
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Col lg="4" md="6" className="mt-5">
+                  <Card className="card-shadow">
+                    <CardBody>
+                      <h6 className="font-light m-b-30">
+                        <b>
+                          “You guys rock! Thank you for making it painless,
+                          pleasant and most of all hassle free! I wish I would
+                          have thought of it first.
+                          <br /> I am really satisfied with my first
+                          Photoshop..”
+                        </b>
+                      </h6>
+                      <div className="d-flex no-block align-items-center">
+                        <span className="thumb-img">
+                          <img src={img3} alt="wrapkit" className="circle" />
+                        </span>
+                        <div className="m-l-20">
+                          <h6 className="m-b-0 customer">Limpsy adam</h6>
+                          <div className="font-10">
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-success">
+                              <i className="fa fa-star"></i>
+                            </a>
+                            <a href="" className="text-muted">
+                              <i className="fa fa-star"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </div>
       </div>
       <div className="spacer"></div>
@@ -1399,25 +1536,25 @@ export default function () {
                 <b>Social</b>
               </h5>
               <div className="round-social light">
-                <a href="#" className="link">
+                <a href="https://www.facebook.com" className="link">
                   <i className="fa fa-facebook" style={{ color: "blue" }}></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://twitter.com/?lang=en" className="link">
                   <i className="fa fa-twitter" style={{ color: "#1DA1F2" }}></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.linkedin.com/" className="link">
                   <i
-                    className="fa fa-google-plus"
-                    style={{ color: "darkred" }}
+                    className="fa brands fa-linkedin"
+                    style={{ color: "#007aff" }}
                   ></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.youtube.com" className="link">
                   <i
                     className="fa fa-youtube-play"
                     style={{ color: "red" }}
                   ></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.instagram.com/" className="link">
                   <i
                     className="fa fa-instagram"
                     style={{ color: "#C13584" }}
@@ -1434,23 +1571,22 @@ export default function () {
                     className="m-t-10 m-b-10 copyright"
                     style={{ color: "white" }}
                   >
-                    Copyrights © 2023 Saraswathi Constructions. All Rights
-                    Reserved.
+                    Copyrights © 2024 pjop technologies. All Rights Reserved.
                   </div>
                   <div className="links ms-auto m-t-10 m-b-10">
                     <a
                       href="#"
-                      className="p-10 p-l-0"
+                      className="col-md-6 p-10 p-l-0"
                       style={{ color: "white" }}
                     >
-                      Terms of Use
+                      Developed by Legends Tech Solution
                     </a>
-                    <a href="#" className="p-10" style={{ color: "white" }}>
+                    {/* <a href="#" className="p-10" style={{ color: "white" }}>
                       Legal Disclaimer
                     </a>
                     <a href="#" className="p-10" style={{ color: "white" }}>
                       Privacy Policy
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </Col>

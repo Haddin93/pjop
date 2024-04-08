@@ -42,14 +42,17 @@ import {
   faLinkedinIn,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-export default function () {
+export default function Videos () {
   const ref = useRef(null);
   const courseRef = useRef(null);
   const contactRef = useRef(null);
+  const trainingRef = useRef(null);
+  const videosRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+  const [MobileMenu, setMobileMenu] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -70,7 +73,7 @@ export default function () {
         </Container>
         <div
           className="header-bar-two float-end clearfix"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "space-between" }}
         >
           <ul>
             <a href="https://www.facebook.com">
@@ -83,23 +86,50 @@ export default function () {
               <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </ul>
+          <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} style={{ marginRight: "5px"}} onClick={() => setMobileMenu(false)}>   
+                <Link to='/'><b style={{ color : "#013C2C" , fontWeight: "bold"}}>Tutorial</b></Link>
+              </ul>
+              <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} style={{ marginRight: "55px"}} onClick={() => setMobileMenu(false)}>   
+                <Link to='/'><b style={{ color : "#013C2C" , fontWeight: "bold"}}>Videos</b></Link>
+              </ul>
+          <Button
+                    type="button"
+                    className="but btn btn-dark w-20 m-1 p-2"
+                    onClick={() => {
+                      window.location.href = "tel:+1234567890";
+                    }}
+                  >
+                    <i className="fa fa-phone" /> <b className="call">Call us</b>
+                  </Button>
         </div>
       </div>
 
       <div className="header1 po-relative">
-        <Container>
+      <Container>
           <Navbar className="navbar-expand-lg h1-nav">
             <NavbarBrand href="/">
               <Image
                 src={require("../assets/images/logos/pjop.png")}
-                className="custom-logo"
+                className="custom-pjop"
               ></Image>
             </NavbarBrand>
 
-            <NavbarToggler>
+            {/* <NavLink href="/" className="pj">
+                  <Link to={'/'} >
+                    <b className="pj">PJOP</b>
+                    </Link>
+                  </NavLink>
+
+                  <NavLink href="/" className="pj" style={{ color: "green", padding: '30px' }}>
+                  <Link to={'/'} >
+                    <b className="pj" style={{ color: "green" }}>BUSINESS</b>
+                    </Link>
+                  </NavLink> */}
+
+            <NavbarToggler onClick={toggle}>
               <span className="ti-menu"></span>
             </NavbarToggler>
-            <Collapse navbar id="header1">
+            <Collapse isOpen={isOpen} navbar id="header1">
               <Nav navbar className="ms-auto mt-2 mt-lg-0">
                 <NavItem className="active">
                   <NavLink href="/" style={{ color: "green" }}>
@@ -109,49 +139,200 @@ export default function () {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#" style={{ color: "green" }}>
-                    <b>About</b>
+                  <NavLink
+                    onClick={() => {
+                      ref.current?.scrollIntoView();
+                    }}
+                    href="#"
+                    style={{ color: "green" }}
+                  >
+                    <b style={{ color: "green" }}>About</b>
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink href="/" style={{ color: "green" }}>
-                    <b>Courses</b>
+                {/* <NavItem>
+                  <NavLink
+                    onClick={() => {
+                      courseRef.current?.scrollIntoView();
+                    }}
+                    href="#"
+                    style={{ color: "green" }}
+                  >              
+                    <b style={{ color: "green" }}>Courses</b>
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav style={{ color: "green" }}>
+                    <b>Courses</b> <i className="fa fa-angle-down m-l-5"></i>
+                  </DropdownToggle>
+                  <DropdownMenu className="b-none animated fadeInUp">
+                    <DropdownItem>
+                      <b>DCA</b>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <b>Desktop Publishing</b>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <b>Software Development</b>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <b>Web Designing</b>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <b>Advanced Python</b>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <b>Hardware Networking</b>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
                 <NavItem>
-                  <NavLink href="/" style={{ color: "green" }}>
-                    <b>Training</b>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/" style={{ color: "green" }}>
-                    <b>Videos</b>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#" style={{ color: "green" }}>
-                    <Link to={"/contact"}>
-                      <b style={{ color: "green" }}>Contact</b>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      trainingRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Training</b>
                     </Link>
                   </NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Gallery</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Typewriting</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Tuition</b>
+                    </Link>
+                  </NavLink>
+                </NavItem>
+                {/* <NavItem>
+                  <NavLink
+                    href="/"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      videosRef.current?.scrollIntoView();
+                    }}
+                  >
+                    <Link to={""}>
+                      <b style={{ color: "green" }}>Videos</b>
+                    </Link>
+                  </NavLink>
+                </NavItem> */}
+                <NavItem>
+                  <NavLink
+                    onClick={() => {
+                      contactRef.current?.scrollIntoView();
+                    }}
+                    href="#"
+                    style={{ color: "green" }}
+                  >
+                    {/* <Link to={"/contact"}> */}
+                    <b style={{ color: "green" }}>Contact</b>
+                    {/* </Link> */}
+                  </NavLink>
+                </NavItem>
+                <NavItem>
                   {/* <a className="btn btn-success text-black mt-0" href="#"> */}
-
-                  {/* <b style={{ color: "black" }}>Join Now</b> */}
-                  <Button type="button" className="btn btn-success w-100">
+                  {/* <Link to={"/login"}> */}
+                  {/* <b style={{color:'black'}}>Call us</b> */}
+                  {/* <Button
+                    type="button"
+                    className="btn btn-success w-100"
+                    onClick={() => {
+                      window.location.href = "tel:+1234567890";
+                    }}
+                  >
                     <i class="fa fa-phone" /> <b>Call us</b>
-                  </Button>
-
-                  {/* </a> */}
+                  </Button> */}
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </Container>
+
+     
+      
+        <div className="header-bar-one navlinks" style={{marginTop: "-15px"}} >
+          <Container>
+            <p style={{ color: "white" }} className="navlinks">
+            <Link to={"/html"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>HTML</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/css"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>CSS</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/javascript"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Javascript</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/php"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>PHP</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/sql"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>SQL</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/reactjs"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>ReactJs</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/bootstrap"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Bootstrap</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/mongodb"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>MongoDB</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/nodejs"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>NodeJs</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/typescript"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Typescript</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/angular"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Angular</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={"/sass"} onClick={scrollToTop} style={{color: "white"}}>
+              <b>Sass</b></Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </p>
+          </Container>
+        </div>
+
+
         {/* <div className="spacer courses"></div> */}
 
-        <div className="title-holder courses" style={{padding:'100px 0'}}>
+        <div className="title-holder courses" style={{ padding: "100px 0" }}>
           <h1 className="text-center">
             <b>Videos</b>
             <hr
@@ -162,6 +343,7 @@ export default function () {
               }}
             />
           </h1>
+          <br />
           <h2 className="text-center tsp">
             <b>We package the videos to make you a happy student</b>
           </h2>
@@ -177,6 +359,7 @@ export default function () {
             }}
           />
         </h1>
+        <br />
         <div className="iframe-div">
           <iframe
             width="560"
@@ -188,8 +371,8 @@ export default function () {
             allowFullScreen
           ></iframe>
         </div>
-       
-       <div className="spacer"></div>
+
+        <div className="spacer"></div>
         <h1 className="text-center">
           <b>French Class</b>
           <hr
@@ -199,6 +382,7 @@ export default function () {
             }}
           />
         </h1>
+        <br />
         <div className="iframe-div">
           <iframe
             width="560"
@@ -221,6 +405,7 @@ export default function () {
             }}
           />
         </h1>
+        <br />
         <div className="iframe-div">
           <iframe
             width="560"
@@ -235,6 +420,7 @@ export default function () {
       </div>
 
       <div className="spacer"></div>
+      {/* Footer */}
       <div className="footer4 b-t spacer" style={{ backgroundColor: "black" }}>
         <Container>
           <Row>
@@ -271,25 +457,25 @@ export default function () {
                 <b>Social</b>
               </h5>
               <div className="round-social light">
-                <a href="#" className="link">
+                <a href="https://www.facebook.com" className="link">
                   <i className="fa fa-facebook" style={{ color: "blue" }}></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://twitter.com/?lang=en" className="link">
                   <i className="fa fa-twitter" style={{ color: "#1DA1F2" }}></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.linkedin.com/" className="link">
                   <i
-                    className="fa fa-google-plus"
-                    style={{ color: "darkred" }}
+                    className="fa brands fa-linkedin"
+                    style={{ color: "#007aff" }}
                   ></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.youtube.com" className="link">
                   <i
                     className="fa fa-youtube-play"
                     style={{ color: "red" }}
                   ></i>
                 </a>
-                <a href="#" className="link">
+                <a href="https://www.instagram.com/" className="link">
                   <i
                     className="fa fa-instagram"
                     style={{ color: "#C13584" }}
@@ -306,23 +492,22 @@ export default function () {
                     className="m-t-10 m-b-10 copyright"
                     style={{ color: "white" }}
                   >
-                    Copyrights © 2023 Saraswathi Constructions. All Rights
-                    Reserved.
+                    Copyrights © 2024 pjop technologies. All Rights Reserved.
                   </div>
                   <div className="links ms-auto m-t-10 m-b-10">
                     <a
                       href="#"
-                      className="p-10 p-l-0"
+                      className="col-md-6 p-10 p-l-0"
                       style={{ color: "white" }}
                     >
-                      Terms of Use
+                      Developed by Legends Tech Solution
                     </a>
-                    <a href="#" className="p-10" style={{ color: "white" }}>
+                    {/* <a href="#" className="p-10" style={{ color: "white" }}>
                       Legal Disclaimer
                     </a>
                     <a href="#" className="p-10" style={{ color: "white" }}>
                       Privacy Policy
-                    </a>
+                    </a> */}
                   </div>
                 </div>
               </Col>

@@ -9,51 +9,51 @@ import {
   HashRouter,
   BrowserRouter
 } from "react-router-dom";
-import Components from "./views/components/components.jsx";
+// import Components from "./views/components/components.jsx";
 import CustomComponents from "./views/custom-components/custom-components.jsx";
-import Home from "./main/components/Home.js";
-import "../src/main/components/App.css";
-import About from "./main/components/About.js";
-import DCA from "./main/components/DCA.js";
-import Desktop from "./main/components/Desktop.js";
-import Software_development from "./main/components/Software_development.js";
-import Web_designing from "./main/components/Web_designing.js";
-import Advanced_python from "./main/components/Advanced_python.js";
-import Hardware_networking from "./main/components/Hardware_networking.js";
-import Courses from "./main/components/Courses.js";
-import Login from "./main/components/Login.js";
-import Contact from "./main/components/Contact.js";
-import Header from "./main/components/Header.js";
-import Training from "./main/components/Training.js";
-import Videos from "./main/components/Videos.js";
-import MS_OFFICE from "./main/components/MS_OFFICE.js";
-import Gallery from "./main/components/Gallery.js";
-import Tuition from "./main/components/Tuition.js";
-import A1_Maths from "./main/components/A1_Maths.js";
-import Physics from "./main/components/Physics.js";
-import Chemistry from "./main/components/Chemistry.js";
-import French from "./main/components/French.js";
-import Computer_science from "./main/components/Computer_science.js";
-import Accountancy from "./main/components/Accountancy.js";
-import Photoshop from "./main/components/Photoshop.js";
-import Coreldraw from "./main/components/Coreldraw.js";
-import Tallyprime from "./main/components/Tallyprime.js";
-import Mathematics from "./main/components/Mathematics.js";
-import Spoken_english from "./main/components/Spoken_english.js";
-import Spoken_hindi from "./main/components/Spoken_hindi.js";
-import Learn_french from "./main/components/Learn_french.js";
-import HTML from "./main/components/HTML.js";
-import CSS from "./main/components/CSS.js";
-import Javascript from "./main/components/Javascript.js";
-import PHP from "./main/components/PHP.js";
-import SQL from "./main/components/SQL.js";
-import ReactJs from "./main/components/ReactJs.js";
-import Bootstrap from "./main/components/Bootstrap.js";
-import MongoDB from "./main/components/MongoDB.js";
-import NodeJS from "./main/components/NodeJS.js";
-import Typescript from "./main/components/Typescript.js";
-import Angular from "./main/components/Angular.js";
-import Sass from "./main/components/Sass.js";
+import Home from "./Home.js";
+import "./App.css";
+// import About from "./main/components/About.js";
+import DCA from "./DCA.js";
+import Desktop from "./Desktop.js";
+import Software_development from "./Software_development.js";
+import Web_designing from "./Web_designing.js";
+import Advanced_python from "./Advanced_python.js";
+import Hardware_networking from "./Hardware_networking.js";
+import Courses from "./Courses.js";
+// import Login from "./main/components/Login.js";
+// import Contact from "./main/components/Contact.js";
+import Header from "./Header.js";
+import Training from "./Training.js";
+import Videos from "./Videos.js";
+import MS_OFFICE from "./MS_OFFICE.js";
+import Gallery from "./Gallery.js";
+import Tuition from "./Tuition.js";
+import A1_Maths from "./A1_Maths.js";
+import Physics from "./Physics.js";
+import Chemistry from "./Chemistry.js";
+import French from "./French.js";
+import Computer_science from "./Computer_science.js";
+import Accountancy from "./Accountancy.js";
+import Photoshop from "./Photoshop.js";
+import Coreldraw from "./Coreldraw.js";
+import Tallyprime from "./Tallyprime.js";
+import Mathematics from "./Mathematics.js";
+import Spoken_english from "./Spoken_english.js";
+import Spoken_hindi from "./Spoken_hindi.js";
+import Learn_french from "./Learn_french.js";
+import HTML from "./HTML.js";
+import CSS from "./CSS.js";
+import Javascript from "./Javascript.js";
+import PHP from "./PHP.js";
+import SQL from "./SQL.js";
+import ReactJs from "./ReactJs.js";
+import Bootstrap from "./Bootstrap.js";
+import MongoDB from "./MongoDB.js";
+import NodeJS from "./NodeJS.js";
+import Typescript from "./Typescript.js";
+import Angular from "./Angular.js";
+import Sass from "./Sass.js";
 
 
 
@@ -110,18 +110,7 @@ root.render(
       <Route path='/nodejs' element={<NodeJS />} />
       <Route path='/typescript' element={<Typescript />} />
       <Route path='/angular' element={<Angular />} />
-      <Route path='/sass' element={<Sass />} />
-
-     
-   
-      
-
-      
-
-      
-      
-      
-      
+      <Route path='/sass' element={<Sass />} />      
       <Route path="/custom-components" element={<CustomComponents />} />
 
     </Routes>

@@ -1603,15 +1603,19 @@ export default function Home () {
           </div>
         </Container>
         <FloatButton.Group
-      shape="circle"
-      style={{
-        right: 24,
-      }}
-    >
-      
-
-      <FloatButton.BackTop visibilityHeight={0} />
-    </FloatButton.Group>
+  shape="circle"
+  style={{
+    right: 24,
+  }}
+>
+  <FloatButton.BackTop 
+    visibilityHeight={0} 
+    style={{
+      backgroundColor: '#2CDD9B',  // Button background color
+      color: "#2CDD9B"             // Button text color
+    }} 
+  />
+</FloatButton.Group>
       </div>
     </>
   );

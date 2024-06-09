@@ -42,6 +42,7 @@ import {
   faLinkedinIn,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { FloatButton } from "antd";
 export default function Home () {
   const ref = useRef(null);
   const courseRef = useRef(null);
@@ -66,6 +67,14 @@ export default function Home () {
   };
   const [MobileMenu, setMobileMenu] = useState(false);
   const navigate = useNavigate();
+
+
+  
+  
+  const handleMouseEnter = () => {
+    // Increment index to move to the next slide
+    setIndex((prevIndex) => (prevIndex + 1) % 3);
+  };
 
   return (
     <>
@@ -351,7 +360,7 @@ export default function Home () {
 
       {/* navbar end */}
 
-      <Carousel interval={3000}>
+      <Carousel interval={null} activeIndex={index} onMouseEnter={handleMouseEnter}>
         <Carousel.Item>
           <Image
             src={require("../src/assets/images/landingpage/slide1.jpg")}
@@ -1593,6 +1602,16 @@ export default function Home () {
             </Row>
           </div>
         </Container>
+        <FloatButton.Group
+      shape="circle"
+      style={{
+        right: 24,
+      }}
+    >
+      
+
+      <FloatButton.BackTop visibilityHeight={0} />
+    </FloatButton.Group>
       </div>
     </>
   );

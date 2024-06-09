@@ -487,6 +487,21 @@
 
 
 
+.carousel:hover .carousel-control-next,
+.carousel:hover .carousel-control-prev {
+  opacity: 1;
+}
+
+.carousel:hover .carousel-inner {
+  animation-play-state: paused;
+}
+
+.carousel-control-prev-icon {
+  display: none;
+}
+.carousel-control-next-icon {
+  display: none;
+}
 
 
  
